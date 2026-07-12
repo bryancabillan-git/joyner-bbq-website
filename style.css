@@ -853,6 +853,27 @@ img {
 /* ─────────────────────────────────────────
    ORDER SECTION
 ───────────────────────────────────────── */
+.order-notice {
+  margin-top: 16px;
+  padding: 16px 20px;
+  background: rgba(192, 57, 43, 0.1);
+  border-left: 3px solid var(--ember);
+  border-radius: 4px;
+  color: var(--ember-light);
+  font-size: 0.95rem;
+  line-height: 1.6;
+}
+
+.order-notice a {
+  color: var(--ember-light);
+  text-decoration: underline;
+  transition: color var(--transition);
+}
+
+.order-notice a:hover {
+  color: var(--white);
+}
+
 .order-menu {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
