@@ -141,126 +141,152 @@
     </div>
   </section>
 
-  <!-- ── MENU SECTION ── -->
-  <section class="section section--dark" id="menu">
-    <div class="container">
-      <p class="section__eyebrow">What We Smoke</p>
-      <h2 class="section__title">Our Menu</h2>
-      <div class="cards">
-        <article class="card card--brisket">
-          <h3 class="card__title">Brisket</h3>
-          <p class="card__desc">18-hour oak-smoked beef brisket, sliced thick with a peppery bark that'll stop you in your tracks.</p>
-        </article>
-        <article class="card card--ribs">
-          <h3 class="card__title">Ribs</h3>
-          <p class="card__desc">St. Louis-style spare ribs, fall-off-the-bone tender with our signature dry rub and house sauce.</p>
-        </article>
-        <article class="card card--turkey">
-          <h3 class="card__title">Turkey</h3>
-          <p class="card__desc">Whole turkeys smoked low and slow over hickory wood for maximum juiciness.</p>
-        </article>
-        <article class="card card--chickenwings">
-          <h3 class="card__title">Chicken Wings</h3>
-          <p class="card__desc">Crispy smoked wings tossed in your choice of our signature sauces or dry rubs.</p>
-        </article>
+  <!-- ── FOOD MENU OVERLAY (opened by any link to #menu) ── -->
+  <div class="page-overlay" id="foodMenu" role="dialog" aria-modal="true" aria-labelledby="foodMenuTitle">
+    <button class="page-overlay__close" id="foodMenuClose" aria-label="Close menu">&#x2715;</button>
+    <div class="page-overlay__scroll">
+      <div class="page-overlay__inner">
+        <p class="section__eyebrow">What We Smoke</p>
+        <h2 class="section__title" id="foodMenuTitle">Our Menu</h2>
+        <div class="food-menu__grid">
+          <article class="food-menu__item">
+            <img src="Images/Brisket2.png" alt="Smoked brisket" class="food-menu__image" />
+            <div class="food-menu__body">
+              <h3 class="food-menu__name">Brisket</h3>
+              <p class="food-menu__desc">18-hour oak-smoked beef brisket, sliced thick with a peppery bark that'll stop you in your tracks.</p>
+            </div>
+          </article>
+          <article class="food-menu__item">
+            <img src="Images/Ribs.png" alt="Smoked ribs" class="food-menu__image" />
+            <div class="food-menu__body">
+              <h3 class="food-menu__name">Ribs</h3>
+              <p class="food-menu__desc">St. Louis-style spare ribs, fall-off-the-bone tender with our signature dry rub and house sauce.</p>
+            </div>
+          </article>
+          <article class="food-menu__item">
+            <img src="Images/dinoribs.jpeg" alt="Smoked Dino Ribs" class="food-menu__image" loading="lazy" />
+            <div class="food-menu__body">
+              <h3 class="food-menu__name">Dino Ribs</h3>
+              <p class="food-menu__desc">Massive beef plate ribs smoked low and slow until buttery tender, with a deep peppery bark and rich beef flavor.</p>
+            </div>
+          </article>
+          <article class="food-menu__item">
+            <img src="Images/Turkey3.png" alt="Smoked turkey" class="food-menu__image" />
+            <div class="food-menu__body">
+              <h3 class="food-menu__name">Turkey</h3>
+              <p class="food-menu__desc">Whole turkeys smoked low and slow over hickory wood for maximum juiciness.</p>
+            </div>
+          </article>
+          <article class="food-menu__item">
+            <img src="Images/ChickenWings.png" alt="Smoked chicken wings" class="food-menu__image" />
+            <div class="food-menu__body">
+              <h3 class="food-menu__name">Chicken Wings</h3>
+              <p class="food-menu__desc">Crispy smoked wings tossed in your choice of our signature sauces or dry rubs.</p>
+            </div>
+          </article>
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ── ORDER SECTION ── -->
-  <section class="section section--charcoal" id="order">
-    <div class="container">
-      <p class="section__eyebrow">Place Your Order</p>
-      <h2 class="section__title">Order Online</h2>
-      
-      <!-- Reheating Notice -->
-      <p class="order-notice">* All orders are prepared for reheating and include detailed heating instructions to ensure optimal flavor and texture. For custom timing arrangements, please contact our pitmaster directly at <a href="mailto:joynerbsbbq@gmail.com">joynerbsbbq@gmail.com</a>.</p>
-      
-      <!-- Order Menu Items -->
-      <div class="order-menu">
-        
-        <!-- Brisket -->
-        <article class="order-item" data-id="brisket" data-name="Brisket" data-price="160" data-unit="each">
-          <div class="order-item__image" style="background-image: url('Images/Brisket2.png')"></div>
-          <div class="order-item__content">
-            <h3 class="order-item__title">Brisket</h3>
-            <p class="order-item__desc">18-hour oak-smoked beef brisket, sliced thick with a peppery bark.</p>
-            <div class="order-item__footer">
-              <span class="order-item__price">$160</span>
-              <div class="order-item__controls">
-                <button class="qty-btn qty-btn--minus" aria-label="Decrease quantity">−</button>
-                <input type="number" class="qty-input" value="1" min="1" max="99" aria-label="Quantity" />
-                <button class="qty-btn qty-btn--plus" aria-label="Increase quantity">+</button>
+  <!-- ── ORDER OVERLAY (opened by any link to #order) ── -->
+  <!-- Not aria-modal: the cart sidebar and cart button stay usable on top of it -->
+  <div class="page-overlay page-overlay--order" id="orderOverlay" role="dialog" aria-labelledby="orderOverlayTitle">
+    <button class="page-overlay__close" id="orderOverlayClose" aria-label="Close order menu">&#x2715;</button>
+    <div class="page-overlay__scroll">
+      <div class="page-overlay__inner">
+        <p class="section__eyebrow">Place Your Order</p>
+        <h2 class="section__title" id="orderOverlayTitle">Order Online</h2>
+
+        <!-- Reheating Notice -->
+        <p class="order-notice">* All orders are prepared for reheating and include detailed heating instructions to ensure optimal flavor and texture. For custom timing arrangements, please contact our pitmaster directly at <a href="mailto:joynerbsbbq@gmail.com">joynerbsbbq@gmail.com</a>.</p>
+
+        <!-- Order Menu Items -->
+        <div class="order-menu">
+
+          <!-- Brisket -->
+          <article class="order-item" data-id="brisket" data-name="Brisket" data-price="160" data-unit="each">
+            <div class="order-item__image" style="background-image: url('Images/Brisket2.png')"></div>
+            <div class="order-item__content">
+              <h3 class="order-item__title">Brisket</h3>
+              <p class="order-item__desc">18-hour oak-smoked beef brisket, sliced thick with a peppery bark.</p>
+              <div class="order-item__footer">
+                <span class="order-item__price">$160</span>
+                <div class="order-item__controls">
+                  <button class="qty-btn qty-btn--minus" aria-label="Decrease quantity">−</button>
+                  <input type="number" class="qty-input" value="1" min="1" max="99" aria-label="Quantity" />
+                  <button class="qty-btn qty-btn--plus" aria-label="Increase quantity">+</button>
+                </div>
+                <button class="btn-add-cart">Add to Cart</button>
               </div>
-              <button class="btn-add-cart">Add to Cart</button>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <!-- Ribs -->
-        <article class="order-item" data-id="ribs" data-name="Ribs" data-price="30" data-unit="rack">
-          <div class="order-item__image" style="background-image: url('Images/Ribs.png')"></div>
-          <div class="order-item__content">
-            <h3 class="order-item__title">Ribs</h3>
-            <p class="order-item__desc">St. Louis-style spare ribs, fall-off-the-bone tender with our signature dry rub.</p>
-            <div class="order-item__footer">
-              <span class="order-item__price">$30 / rack</span>
-              <div class="order-item__controls">
-                <button class="qty-btn qty-btn--minus" aria-label="Decrease quantity">−</button>
-                <input type="number" class="qty-input" value="1" min="1" max="99" aria-label="Quantity" />
-                <button class="qty-btn qty-btn--plus" aria-label="Increase quantity">+</button>
+          <!-- Ribs -->
+          <article class="order-item" data-id="ribs" data-name="Ribs" data-price="30" data-unit="rack">
+            <div class="order-item__image" style="background-image: url('Images/Ribs.png')"></div>
+            <div class="order-item__content">
+              <h3 class="order-item__title">Ribs</h3>
+              <p class="order-item__desc">St. Louis-style spare ribs, fall-off-the-bone tender with our signature dry rub.</p>
+              <div class="order-item__footer">
+                <span class="order-item__price">$30 / rack</span>
+                <div class="order-item__controls">
+                  <button class="qty-btn qty-btn--minus" aria-label="Decrease quantity">−</button>
+                  <input type="number" class="qty-input" value="1" min="1" max="99" aria-label="Quantity" />
+                  <button class="qty-btn qty-btn--plus" aria-label="Increase quantity">+</button>
+                </div>
+                <button class="btn-add-cart">Add to Cart</button>
               </div>
-              <button class="btn-add-cart">Add to Cart</button>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <!-- Turkey -->
-        <article class="order-item" data-id="turkey" data-name="Turkey" data-price="65" data-unit="breast">
-          <div class="order-item__image" style="background-image: url('Images/Turkey3.png')"></div>
-          <div class="order-item__content">
-            <h3 class="order-item__title">Turkey</h3>
-            <p class="order-item__desc">Whole turkeys smoked low and slow over hickory wood for maximum juiciness.</p>
-            <div class="order-item__footer">
-              <span class="order-item__price">$65 / breast</span>
-              <div class="order-item__controls">
-                <button class="qty-btn qty-btn--minus" aria-label="Decrease quantity">−</button>
-                <input type="number" class="qty-input" value="1" min="1" max="99" aria-label="Quantity" />
-                <button class="qty-btn qty-btn--plus" aria-label="Increase quantity">+</button>
+          <!-- Turkey -->
+          <article class="order-item" data-id="turkey" data-name="Turkey" data-price="65" data-unit="breast">
+            <div class="order-item__image" style="background-image: url('Images/Turkey3.png')"></div>
+            <div class="order-item__content">
+              <h3 class="order-item__title">Turkey</h3>
+              <p class="order-item__desc">Whole turkeys smoked low and slow over hickory wood for maximum juiciness.</p>
+              <div class="order-item__footer">
+                <span class="order-item__price">$65 / breast</span>
+                <div class="order-item__controls">
+                  <button class="qty-btn qty-btn--minus" aria-label="Decrease quantity">−</button>
+                  <input type="number" class="qty-input" value="1" min="1" max="99" aria-label="Quantity" />
+                  <button class="qty-btn qty-btn--plus" aria-label="Increase quantity">+</button>
+                </div>
+                <button class="btn-add-cart">Add to Cart</button>
               </div>
-              <button class="btn-add-cart">Add to Cart</button>
             </div>
-          </div>
-        </article>
+          </article>
 
-        <!-- Wings with size selector -->
-        <article class="order-item order-item--wings">
-          <div class="order-item__image" style="background-image: url('Images/ChickenWings.png')"></div>
-          <div class="order-item__content">
-            <h3 class="order-item__title">Wings</h3>
-            <p class="order-item__desc">Crispy smoked wings tossed in your choice of our signature sauces or dry rubs.</p>
-            <div class="order-item__footer">
-              <div class="order-item__size-selector">
-                <label for="wingsSize" class="size-label">Size:</label>
-                <select id="wingsSize" class="size-select">
-                  <option value="20|30">20 Wings - $30</option>
-                  <option value="50|75">50 Wings - $75</option>
-                  <option value="100|145">100 Wings - $145</option>
-                </select>
+          <!-- Wings with size selector -->
+          <article class="order-item order-item--wings">
+            <div class="order-item__image" style="background-image: url('Images/ChickenWings.png')"></div>
+            <div class="order-item__content">
+              <h3 class="order-item__title">Wings</h3>
+              <p class="order-item__desc">Crispy smoked wings tossed in your choice of our signature sauces or dry rubs.</p>
+              <div class="order-item__footer">
+                <div class="order-item__size-selector">
+                  <label for="wingsSize" class="size-label">Size:</label>
+                  <select id="wingsSize" class="size-select">
+                    <option value="20|30">20 Wings - $30</option>
+                    <option value="50|75">50 Wings - $75</option>
+                    <option value="100|145">100 Wings - $145</option>
+                  </select>
+                </div>
+                <div class="order-item__controls">
+                  <button class="qty-btn qty-btn--minus" aria-label="Decrease quantity">−</button>
+                  <input type="number" class="qty-input" value="1" min="1" max="99" aria-label="Quantity" />
+                  <button class="qty-btn qty-btn--plus" aria-label="Increase quantity">+</button>
+                </div>
+                <button class="btn-add-cart">Add to Cart</button>
               </div>
-              <div class="order-item__controls">
-                <button class="qty-btn qty-btn--minus" aria-label="Decrease quantity">−</button>
-                <input type="number" class="qty-input" value="1" min="1" max="99" aria-label="Quantity" />
-                <button class="qty-btn qty-btn--plus" aria-label="Increase quantity">+</button>
-              </div>
-              <button class="btn-add-cart">Add to Cart</button>
             </div>
-          </div>
-        </article>
+          </article>
 
+        </div>
       </div>
     </div>
-  </section>
+  </div>
 
   <!-- ── SHOPPING CART SIDEBAR ── -->
   <aside class="cart-sidebar" id="cartSidebar" aria-label="Shopping cart">

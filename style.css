@@ -364,151 +364,116 @@ img {
 }
 
 /* ─────────────────────────────────────────
-   MENU CARDS
+   SEE-THROUGH PAGE OVERLAYS (food menu, order online)
 ───────────────────────────────────────── */
-.cards {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
-  gap: 24px;
+.page-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 250;
+  background: rgba(10,10,10,0.75);
+  -webkit-backdrop-filter: blur(4px);
+  backdrop-filter: blur(4px);
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity var(--transition), visibility 0s linear 0.35s;
 }
 
-.card {
-  background: var(--dark-gray);
+.page-overlay.is-open {
+  opacity: 1;
+  visibility: visible;
+  transition: opacity var(--transition), visibility 0s;
+}
+
+/* Sits under the cart button (150) and cart sidebar (200) so the cart works while ordering */
+.page-overlay--order {
+  z-index: 140;
+}
+
+.page-overlay__close {
+  position: absolute;
+  top: 32px;
+  right: 48px;
+  z-index: 1;
+  background: none;
+  border: none;
+  color: var(--white);
+  font-size: 1.8rem;
+  cursor: pointer;
+  transition: opacity var(--transition);
+}
+
+.page-overlay__close:hover { opacity: 0.6; }
+
+/* Scrolls on small screens while the close button stays put */
+.page-overlay__scroll {
+  position: absolute;
+  inset: 0;
+  overflow-y: auto;
+  display: flex;
+  padding: 88px 24px 48px;
+}
+
+/* margin: auto centers the content, and still lets it scroll when taller than the screen */
+.page-overlay__inner {
+  margin: auto;
+  width: 100%;
+  max-width: 1200px;
+  text-align: center;
+}
+
+.food-menu__grid {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 24px;
+  width: 100%;
+  max-width: 900px;
+  margin: 0 auto;
+}
+
+.food-menu__item {
+  flex: 0 1 260px;
+  background: rgba(20,20,20,0.85);
   border: 1px solid var(--mid-gray);
   border-radius: 4px;
-  padding: 36px 28px;
+  overflow: hidden;
   transition: border-color var(--transition), transform var(--transition);
 }
 
-.card--brisket {
-  background-image:
-    linear-gradient(
-      rgba(255,255,255,0.18) 0%,
-      rgba(255,255,255,0.32) 100%
-    ),
-    url('Images/Brisket2.png');
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.card--brisket .card__title,
-.card--brisket .card__desc,
-.card--brisket .card__price {
-  position: relative;
-  z-index: 1;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.55);
-}
-
-.card--ribs {
-  background-image:
-    linear-gradient(
-      rgba(255,255,255,0.18) 0%,
-      rgba(255,255,255,0.32) 100%
-    ),
-    url('Images/Ribs.png');
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.card--ribs .card__title,
-.card--ribs .card__desc,
-.card--ribs .card__price {
-  position: relative;
-  z-index: 1;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.55);
-}
-
-.card--turkey {
-  background-image:
-    linear-gradient(
-      rgba(255,255,255,0.18) 0%,
-      rgba(255,255,255,0.32) 100%
-    ),
-    url('Images/Turkey3.png');
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.card--turkey .card__title,
-.card--turkey .card__desc,
-.card--turkey .card__price {
-  position: relative;
-  z-index: 1;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.55);
-}
-
-.card--chickenwings {
-  background-image:
-    linear-gradient(
-      rgba(255,255,255,0.18) 0%,
-      rgba(255,255,255,0.32) 100%
-    ),
-    url('Images/ChickenWings.png');
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.card--chickenwings .card__title,
-.card--chickenwings .card__desc {
-  position: relative;
-  z-index: 1;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.55);
-}
-
-.card--sides {
-  background-image:
-    linear-gradient(
-      rgba(255,255,255,0.18) 0%,
-      rgba(255,255,255,0.32) 100%
-    ),
-    url('Images/FixedPlate.png');
-  background-size: cover;
-  background-position: center;
-  position: relative;
-}
-
-.card--sides .card__title,
-.card--sides .card__desc,
-.card--sides .card__price {
-  position: relative;
-  z-index: 1;
-  text-shadow: 0 1px 4px rgba(0,0,0,0.55);
-}
-
-.card:hover {
+.food-menu__item:hover {
   border-color: var(--ember);
   transform: translateY(-4px);
 }
 
-.card__icon {
-  font-size: 2rem;
-  margin-bottom: 16px;
+.food-menu__image {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
 }
 
-.card__title {
+.food-menu__body {
+  padding: 20px 20px 24px;
+}
+
+.food-menu__name {
   font-family: var(--font-display);
   font-size: 1.6rem;
   letter-spacing: 0.06em;
   color: var(--white);
-  margin-bottom: 10px;
+  margin-bottom: 8px;
 }
 
-.card__desc {
+.food-menu__desc {
   font-size: 0.88rem;
   color: var(--ash);
   line-height: 1.7;
-  margin-bottom: 20px;
 }
 
-.card__price {
-  font-size: 0.8rem;
-  font-weight: 600;
-  letter-spacing: 0.12em;
-  color: var(--ember);
+@media (max-width: 600px) {
+  .page-overlay__close {
+    top: 20px;
+    right: 24px;
+  }
 }
 
 /* ─────────────────────────────────────────
@@ -871,6 +836,7 @@ img {
   color: var(--ember-light);
   font-size: 0.95rem;
   line-height: 1.6;
+  text-align: left;
 }
 
 .order-notice a {
@@ -883,14 +849,18 @@ img {
   color: var(--white);
 }
 
+/* Centered rows, so a card that wraps onto its own row stays in the middle */
 .order-menu {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
   gap: 28px;
   margin-top: 24px;
+  text-align: left;
 }
 
 .order-item {
+  flex: 0 1 270px;
   background: var(--dark-gray);
   border: 1px solid var(--mid-gray);
   border-radius: 4px;

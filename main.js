@@ -82,7 +82,7 @@ if (hero) {
 }
 
 // ── Fade-in on scroll (Intersection Observer) ────────────────────────────────
-const fadeEls = document.querySelectorAll('.card, .about__text, .about__image-wrap, .contact__item');
+const fadeEls = document.querySelectorAll('.about__text, .about__image-wrap, .contact__item');
 
 if ('IntersectionObserver' in window) {
   const observer = new IntersectionObserver((entries) => {
@@ -441,6 +441,89 @@ if ('IntersectionObserver' in window) {
 
   // Initialize
   loadCart();
+})();
+
+// ── See-through page overlays (food menu, order online) ─────────────────────
+// Links to #menu or #order open the matching overlay over the page instead of scrolling.
+// Kept below the cart code so Escape closes an open cart first (it marks the key as handled).
+(function () {
+  'use strict';
+
+  const cartSidebar = document.getElementById('cartSidebar');
+  const isCartOpen = () => !!cartSidebar && cartSidebar.classList.contains('is-open');
+
+  function setupOverlay({ overlayId, closeId, hash, keepOpenSelector, cartOnTop }) {
+    const overlay  = document.getElementById(overlayId);
+    const closeBtn = document.getElementById(closeId);
+
+    if (!overlay || !closeBtn) return;
+
+    let lastFocus = null;
+
+    function openOverlay() {
+      lastFocus = document.activeElement;
+      overlay.classList.add('is-open');
+      document.body.style.overflow = 'hidden';
+      closeBtn.focus();
+    }
+
+    function closeOverlay() {
+      overlay.classList.remove('is-open');
+      document.body.style.overflow = '';
+      if (lastFocus && typeof lastFocus.focus === 'function') {
+        lastFocus.focus();
+      }
+    }
+
+    document.querySelectorAll(`a[href="${hash}"]`).forEach(link => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
+        openOverlay();
+      });
+    });
+
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      closeOverlay();
+    });
+
+    // Close when clicking the see-through background (anywhere outside the cards and heading).
+    // While the cart is open on top, a background click is ignored so it can't close the order screen by accident.
+    overlay.addEventListener('click', (e) => {
+      if (e.target.closest(keepOpenSelector)) return;
+      if (cartOnTop && isCartOpen()) return;
+      closeOverlay();
+    });
+
+    // Close on Escape key, unless something on top (nav overlay, cart) already handled it
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape' && !e.defaultPrevented && overlay.classList.contains('is-open')) {
+        e.preventDefault();
+        closeOverlay();
+      }
+    });
+
+    // Old links such as joynerbsbbq.com/#menu still open the overlay
+    if (window.location.hash === hash) {
+      openOverlay();
+    }
+  }
+
+  setupOverlay({
+    overlayId: 'foodMenu',
+    closeId: 'foodMenuClose',
+    hash: '#menu',
+    keepOpenSelector: '.food-menu__item, .section__eyebrow, .section__title, .page-overlay__close',
+    cartOnTop: false
+  });
+
+  setupOverlay({
+    overlayId: 'orderOverlay',
+    closeId: 'orderOverlayClose',
+    hash: '#order',
+    keepOpenSelector: '.order-item, .order-notice, .section__eyebrow, .section__title, .page-overlay__close',
+    cartOnTop: true
+  });
 })();
 
 // ── Catering Form Handler ────────────────────────────────────────────────────
