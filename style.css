@@ -833,20 +833,21 @@ img {
   background: rgba(192, 57, 43, 0.1);
   border-left: 3px solid var(--ember);
   border-radius: 4px;
-  color: var(--ember-light);
-  font-size: 0.95rem;
+  color: var(--white);
+  font-size: 0.82rem;
+  font-weight: 600;
   line-height: 1.6;
   text-align: left;
 }
 
 .order-notice a {
-  color: var(--ember-light);
+  color: var(--white);
   text-decoration: underline;
-  transition: color var(--transition);
+  transition: opacity var(--transition);
 }
 
 .order-notice a:hover {
-  color: var(--white);
+  opacity: 0.75;
 }
 
 /* Centered rows, so a card that wraps onto its own row stays in the middle */
